@@ -1,7 +1,7 @@
 body {
   font-size: 16px;
-  color: #fff;
-  background-color: #7400f6;
+  color:red;
+  background-color:white;
   font-family: 'Oxygen', sans-serif;
 }
 
@@ -22,7 +22,7 @@ body {
 }
 
 .navbar-brand p { /* Kosher cert */
-  color:blue;
+  color:red;
   text-transform: uppercase;
   font-size: .7em;
   margin-top: 15px;
@@ -34,14 +34,17 @@ body {
   background:#e9ef0d ;
   color:floralwhite;
 }
-
-.btn {
-  color: red;
-  background-color: yellow;
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  color: #e9ef0d;
 }
 
+
 #span1{
-  color: blue;
+  color:red;
 }
 
 #img-fluid{
@@ -50,5 +53,7 @@ body {
 }
 
 .navbar-dark {
-     background-color: #512DA8;
+     background-color:white;
+     color:red;
+     text-emphasis-color: red;
 }
