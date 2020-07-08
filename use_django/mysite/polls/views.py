@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Choice, Question
+from .models import Choice, Question, Person
 from django.views import generic
 from django.utils import timezone
 
@@ -16,10 +16,27 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
+def detail(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/detail.html', {'question': question})
+
+def createpost(request):
+    if request.method == 'POST':
+        if request.POST.get('city') and request.POST.get('company'):
+            post = Post()
+            post.city = request.POST.get('city')
+            post.company = request.POST.get('company')
+            post.save()
+
+            return render(request, 'posts/createpost.html')  
+
+        else:
+            return render(request,'posts/createpost.html')
+
 
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'polls/createpost.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
