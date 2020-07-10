@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
 
 def index(request):
-    return HttpResponse("Welcome to job portal")
+    template = loader.get_template('portal/index.html')
+    context = {
+        'name':'Ameya',
+    }
+    return HttpResponse(template.render(context,request))
