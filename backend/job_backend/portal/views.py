@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .forms import NameForm
 from django.http import HttpResponseRedirect
+from .models import Job
 
 def index(request):
     template = loader.get_template('portal/index.html')
@@ -14,10 +15,18 @@ def index(request):
 
 def simpleform(request):
     if request.method == 'POST':
+        print("inside post")
         form = NameForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/thanks/')
+            print("entering inside form-is-valid")
+            company = form.cleaned_data['company']
+            c = Job(company= company)
+            c.save()
+            return HttpResponseRedirect('thanks/')
+        else:
+            print("entering into else block")
     else:
+        print("inside get")
         form = NameForm()
     return render(request, 'portal/simpleform.html', {'form': form})
 
