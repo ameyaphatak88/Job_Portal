@@ -40,7 +40,11 @@ def jobs_display(request):
     from portal.models import Job
     jobs = Job.objects.all()
     ljobs = list(jobs)
-    str1 = ""
-    for ele in ljobs:
-        str1 = str1 + ele.company + ","
-    return HttpResponse(str1)
+    fruit = ["apple", "banana", "cherry"]
+    context = {'a':fruit}
+
+    template = loader.get_template('portal/post_job.html')  
+    return HttpResponse(template.render(context, request))
+
+
+class Resultview:
