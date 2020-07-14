@@ -4,6 +4,8 @@ from django.template import loader
 from .forms import NameForm
 from django.http import HttpResponseRedirect
 from .models import Job
+from django.urls import reverse
+from django.views import generic
 
 def index(request):
     template = loader.get_template('portal/index.html')
@@ -39,12 +41,10 @@ def thanks(request):
 def jobs_display(request):
     from portal.models import Job
     jobs = Job.objects.all()
-    ljobs = list(jobs)
-    fruit = ["apple", "banana", "cherry"]
-    context = {'a':fruit}
 
+    context = {
+        "a":jobs
+    }
     template = loader.get_template('portal/post_job.html')  
     return HttpResponse(template.render(context, request))
 
-
-class Resultview:
