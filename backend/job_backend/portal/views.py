@@ -34,3 +34,13 @@ def simpleform(request):
 def thanks(request):
     template = loader.get_template('portal/thanks.html')
     return HttpResponse(template.render({}, request))
+
+
+def jobs_display(request):
+    from portal.models import Job
+    jobs = Job.objects.all()
+    ljobs = list(jobs)
+    str1 = ""
+    for ele in ljobs:
+        str1 = str1 + ele.company + ","
+    return HttpResponse(str1)
