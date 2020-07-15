@@ -22,7 +22,10 @@ def simpleform(request):
         form = NameForm(request.POST)
         if form.is_valid():
             company = form.cleaned_data['company']
-            c = Job(company= company)
+            city = form.cleaned_data['city']
+            primary_skill = form.cleaned_data['primary_skill']
+            min_work_experience = form.cleaned_data['min_work_experience']
+            c = Job(company= company, city = city, primary_skill = primary_skill, min_work_experience = min_work_experience)
             flag = 0
             for ajob in jobs:
                 if c.company.lower() == ajob.company.lower():
