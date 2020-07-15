@@ -8,5 +8,5 @@ schoices = [('C++', 'C++'),
 class Job(models.Model):
     company = models.CharField(max_length = 20)
     city = models.CharField(max_length = 20)
-    primary_skill = forms.RadioSelect(choices = schoices)
-    min_work_experience = forms.IntegerField(label = 'min_work_experience')
+    min_work_experience = models.IntegerField(default = 0)
+    primary_skill = models.CharField(max_length = 20, default = "C++")
