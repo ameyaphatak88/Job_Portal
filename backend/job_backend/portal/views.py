@@ -16,19 +16,23 @@ def index(request):
 
 
 def simpleform(request):
+    from portal.models import Job
+    jobs = Job.objects.all()
     if request.method == 'POST':
-        print("inside post")
         form = NameForm(request.POST)
         if form.is_valid():
-            print("entering inside form-is-valid")
             company = form.cleaned_data['company']
             c = Job(company= company)
+            flag = 0
+            for ajob in jobs:
+                if c.company.lower() == ajob.company.lower():
+                    flag = 1
+            if flag == 1:
+                return HttpResponse("Cannot add as the company aldeady exists")
+            
             c.save()
-            return HttpResponseRedirect('thanks/')
-        else:
-            print("entering into else block")
+            return HttpResponseRedirect('jobs/')
     else:
-        print("inside get")
         form = NameForm()
     return render(request, 'portal/simpleform.html', {'form': form})
 
