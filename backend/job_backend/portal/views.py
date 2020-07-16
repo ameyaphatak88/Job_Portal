@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .forms import NameForm
+from .forms import NameForm, SearchForm
 from django.http import HttpResponseRedirect
 from .models import Job
 from django.urls import reverse
 from django.views import generic
+ 
 
 def index(request):
     template = loader.get_template('portal/index.html')
@@ -39,6 +40,12 @@ def simpleform(request):
     else:
         form = NameForm()
     return render(request, 'portal/simpleform.html', {'form': form})
+
+
+def search_by_company(request):
+    form = SearchForm()
+    return render(request, 'portal/search_by_company.html', {'form' : form})
+
 
 
 def thanks(request):
