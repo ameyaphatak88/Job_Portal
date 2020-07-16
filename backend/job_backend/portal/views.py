@@ -42,9 +42,9 @@ def simpleform(request):
     return render(request, 'portal/simpleform.html', {'form': form})
 
 
-def search_by_company(request):
+def search(request):
     form = SearchForm()
-    return render(request, 'portal/search_by_company.html', {'form' : form})
+    return render(request, 'portal/search.html', {'form' : form})
 
 
 
