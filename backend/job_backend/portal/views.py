@@ -42,14 +42,37 @@ def simpleform(request):
     return render(request, 'portal/simpleform.html', {'form': form})
 
 
+def get_all_jobs_with_companyname(company):
+    from portal.models import Job
+    jobs = Job.objects.all()
+    sjobs = []
+    for ajobs in jobs:
+        if ajobs.company == company:
+            sjobs.append(ajobs)
+    return sjobs
+
+
 def search(request):
-    form = SearchForm()
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            company = form.cleaned_data['company']
+            jobs = get_all_jobs_with_companyname(company)
+            print(jobs)
+            context = {
+                "sjobs" : jobs
+            }
+            template = loader.get_template('portal/search_company_display.html')
+            return HttpResponse(template.render(context, request))
+    else:
+        form = SearchForm()
+    
     return render(request, 'portal/search.html', {'form' : form})
 
 
 
 def thanks(request):
-    template = loader.get_template('portal/thanks.html')
+    template = loader.get_template('portal/thanks.html') 
     return HttpResponse(template.render({}, request))
 
 
@@ -62,4 +85,6 @@ def jobs_display(request):
     }
     template = loader.get_template('portal/post_job.html')  
     return HttpResponse(template.render(context, request))
+
+
 
